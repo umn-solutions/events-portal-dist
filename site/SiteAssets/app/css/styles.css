@@ -1,0 +1,621 @@
+/* Global application styles -- token-based, brand-neutral */
+
+/* -----------------------------------------------------------------------
+   App-level display tokens (font sizes + layout widths)
+   ----------------------------------------------------------------------- */
+
+:root {
+  --size-display: clamp(2.25rem, 4vw + 1rem, 3.25rem);
+  --size-figure: clamp(2rem, 3vw + 1rem, 2.75rem);
+  --size-section-title: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+  --size-eyebrow: 0.75rem;
+  --content-maxw: 1120px;
+  --icon-file: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M5 3h9l5 5v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm8 1.5V9h4.5z'/%3E%3C/svg%3E");
+  --surface-page: #F3EEE2;
+  /* --surface-card shares the sand hue family (#F3EEE2) but sits at higher
+     lightness, giving a gentle figure/ground lift without the harshness of
+     pure white. */
+  --surface-card: #FBF9F4;
+}
+
+/* -----------------------------------------------------------------------
+   Surface utility -- single source of truth for card / panel look.
+   Add the `surface` class alongside any card class in markup; delete the
+   duplicated background / border / border-radius / box-shadow from that
+   rule and keep only its deltas (padding, layout, hover overrides, etc.).
+   ----------------------------------------------------------------------- */
+
+.surface {
+  background: var(--surface-card);
+  border: 1px solid var(--color-stroke-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2);
+}
+
+/* -----------------------------------------------------------------------
+   Root shell -- full-bleed so colored bands span the viewport
+   ----------------------------------------------------------------------- */
+
+#root {
+  max-width: none;
+  margin: 0;
+  padding: 0 0 var(--space-xxxl);
+  background: var(--surface-page);
+}
+
+/* Inner content wrapper used by every band */
+.shell {
+  width: 100%;
+  max-width: var(--content-maxw);
+  margin: 0 auto;
+  padding-inline: var(--space-xl);
+}
+
+/* -----------------------------------------------------------------------
+   Navigation -- sticky white bar
+   ----------------------------------------------------------------------- */
+
+.app-nav {
+  position: sticky;
+  top: var(--space-m);
+  z-index: 100;
+  background: transparent;
+  padding-block: var(--space-m);
+  width: 100%;
+}
+
+/* Floating rounded pill bar */
+.app-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-m);
+  padding-inline: var(--space-xl);
+  background: var(--surface-card);
+  border: 1px solid var(--color-stroke-subtle);
+  border-radius: var(--radius-circular);
+  box-shadow: var(--shadow-8);
+}
+
+.app-nav__links {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: space-evenly;
+}
+
+/* Neutralise LinkButton primary-variant background for nav items across all
+   states. Only background-color is reset -- border/box-shadow/outline are left
+   intact so the active underline and the focus ring survive. */
+.app-nav .app-nav__brand,
+.app-nav .app-nav__link,
+.app-nav .app-nav__brand:hover,
+.app-nav .app-nav__brand:active,
+.app-nav .app-nav__brand:focus,
+.app-nav .app-nav__link:hover,
+.app-nav .app-nav__link:active,
+.app-nav .app-nav__link:focus {
+  background-color: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  width: auto;
+}
+
+.app-nav__brand {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-500);
+  color: var(--color-fg-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sNudge);
+}
+
+.app-nav__brand-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sNudge);
+}
+
+.app-nav__logo {
+  height: var(--space-xl);
+  width: auto;
+  object-fit: contain;
+}
+
+.app-nav__link {
+  color: var(--color-fg-secondary);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-xs) 0;
+  border-bottom: 2px solid transparent;
+  transition: color var(--duration-fast) var(--curve-easy-ease),
+              border-color var(--duration-fast) var(--curve-easy-ease);
+}
+
+.app-nav__link:hover {
+  color: var(--color-fg-primary);
+}
+
+.app-nav__link--active {
+  color: var(--color-brand-primary);
+  border-bottom-color: var(--color-brand-primary);
+}
+
+/* -----------------------------------------------------------------------
+   Shared typography: eyebrow + section title + lead
+   ----------------------------------------------------------------------- */
+
+.eyebrow {
+  display: block;
+  font-size: var(--size-eyebrow);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand-primary);
+  margin-bottom: var(--space-sNudge);
+}
+
+.section-title {
+  margin: 0;
+  font-size: var(--size-section-title);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color: var(--color-fg-primary);
+}
+
+.section-lead {
+  margin: var(--space-sNudge) 0 0;
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-400);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+/* -----------------------------------------------------------------------
+   Hero band (home)
+   ----------------------------------------------------------------------- */
+
+.hero {
+  background: transparent;
+  border-bottom: 1px solid var(--color-stroke-subtle);
+  padding-block: clamp(var(--space-xxxl), 8vw, 96px);
+}
+
+.hero__inner {
+  max-width: 760px;
+}
+
+.hero__title {
+  margin: 0;
+  font-size: var(--size-display);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  color: var(--color-fg-primary);
+}
+
+.hero__sub {
+  margin: var(--space-l) 0 var(--space-xl);
+  font-size: var(--font-size-500);
+  color: var(--color-fg-secondary);
+  line-height: 1.6;
+}
+
+.hero__image {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-4);
+  margin-top: var(--space-xl);
+}
+
+/* -----------------------------------------------------------------------
+   Intro band (home -- about + resources)
+   ----------------------------------------------------------------------- */
+
+.intro {
+  padding-block: clamp(var(--space-xxl), 6vw, 72px);
+  border-bottom: 1px solid var(--color-stroke-subtle);
+}
+
+.intro__grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: var(--space-xxl);
+  align-items: start;
+}
+
+/* Card panel for the left column of the intro grid. Surface look comes from
+   the .surface utility class added in markup. Wider column + extra lateral
+   padding by request -- this specific card only. */
+.intro__main {
+  padding: var(--space-xl) var(--space-xxl);
+}
+
+.intro__body {
+  margin: var(--space-l) 0 0;
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-400);
+  line-height: 1.7;
+  max-width: 60ch;
+}
+
+.intro__body + .intro__body { margin-top: var(--space-m); }
+
+.intro__aside-title {
+  margin: 0 0 var(--space-m);
+  font-size: var(--font-size-500);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+}
+
+.intro__aside-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+/* Surface look delegated to the .surface utility class in markup. */
+.resource-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sNudge);
+  padding: var(--space-l);
+  cursor: pointer;
+  transition: box-shadow var(--duration-fast) var(--curve-easy-ease),
+              transform var(--duration-fast) var(--curve-easy-ease),
+              border-color var(--duration-fast) var(--curve-easy-ease);
+}
+
+.resource-card:hover {
+  box-shadow: var(--shadow-8);
+  transform: translateY(-2px);
+  border-color: var(--color-brand-stroke);
+}
+
+.resource-card__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  background-color: var(--color-brand-primary);
+  -webkit-mask: var(--icon-file) center / contain no-repeat;
+  mask: var(--icon-file) center / contain no-repeat;
+}
+
+.resource-card__text { display: flex; flex-direction: column; gap: 2px; }
+
+.resource-card__title { font-weight: var(--font-weight-semibold); color: var(--color-fg-primary); }
+
+.resource-card__note {
+  font-size: var(--font-size-200);
+  color: var(--color-fg-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 880px) {
+  .intro__grid { grid-template-columns: 1fr; }
+}
+
+/* -----------------------------------------------------------------------
+   Figures band (home signature element)
+   ----------------------------------------------------------------------- */
+
+.figures {
+  padding-block: clamp(var(--space-xxl), 6vw, 72px);
+}
+
+.figures__head {
+  margin-bottom: var(--space-xl);
+}
+
+/* Card panel wrapping the stats grid. Surface look comes from the .surface
+   utility class added in markup. */
+.figures__grid-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-xxl);
+  align-items: center;
+  padding: var(--space-xl);
+}
+
+.figures__intro { align-self: start; }
+
+.figures__lead {
+  margin: var(--space-l) 0 0;
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-400);
+  line-height: 1.7;
+  max-width: 46ch;
+}
+
+@media (max-width: 880px) {
+  .figures__grid-wrap { grid-template-columns: 1fr; }
+}
+
+.figures__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-xl);
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-left: var(--space-l);
+  border-left: 3px solid var(--color-brand-primary);
+}
+
+.figure__value {
+  font-size: var(--size-figure);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-primary);
+  line-height: 1;
+}
+
+.figure__label {
+  font-size: var(--font-size-200);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-fg-secondary);
+}
+
+/* -----------------------------------------------------------------------
+   Catalog grid
+   ----------------------------------------------------------------------- */
+
+.catalog-band {
+  padding-block: var(--space-xxl);
+}
+
+.catalog-header {
+  padding-block: var(--space-xxl) var(--space-xl);
+  border-bottom: 1px solid var(--color-stroke-subtle);
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-l);
+  padding-block: var(--space-xl) var(--space-l);
+}
+
+/* Filter bar -- off-white .surface toolbar panel (surface look comes from the
+   shared .surface utility in markup); flex row of 4 controls, wraps on narrow
+   viewports. Sits above catalog grids. */
+.catalog-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-m);
+  padding: var(--space-l);
+  margin-block: var(--space-l);
+}
+
+/* Search label grows to fill remaining row space */
+.catalog-filters .filter-search {
+  flex: 1 1 240px;
+}
+
+/* TextInput inside the search label stretches to fill the wrapper */
+.catalog-filters .filter-search .nofbiz__textinput {
+  width: 100%;
+}
+
+/* ComboBox labels keep natural width but won't clip at narrow sizes */
+.catalog-filters .nofbiz__fieldlabel:not(.filter-search) {
+  min-width: 160px;
+}
+
+/* -----------------------------------------------------------------------
+   Summary card (shared by catalog)
+   ----------------------------------------------------------------------- */
+
+/* Surface look delegated to the .surface utility class in markup.
+   Deltas kept here: green top accent border and heavier shadow. */
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-m);
+  padding: var(--space-l);
+  border-top: 3px solid var(--color-brand-primary);
+  box-shadow: var(--shadow-4);
+  transition: box-shadow var(--duration-fast) var(--curve-easy-ease),
+              transform var(--duration-fast) var(--curve-easy-ease);
+}
+
+.summary-card:hover {
+  box-shadow: var(--shadow-8);
+  transform: translateY(-2px);
+}
+
+/* -----------------------------------------------------------------------
+   Status badge (shared by catalog + admin manage)
+   ----------------------------------------------------------------------- */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xxs) var(--space-mNudge);
+  border-radius: var(--radius-circular);
+  font-size: var(--font-size-200);
+  font-weight: var(--font-weight-semibold);
+  width: fit-content;
+}
+
+.status-badge--open {
+  background: var(--color-success-bg);
+  color: var(--color-success-fg);
+}
+
+.status-badge--closed {
+  background: var(--color-bg-secondary);
+  color: var(--color-fg-secondary);
+}
+
+.status-badge--cancelled {
+  background: var(--color-danger-bg);
+  color: var(--color-danger-fg);
+}
+
+.status-badge--unknown {
+  background: var(--color-bg-secondary);
+  color: var(--color-fg-tertiary);
+}
+
+.status-badge--accepted {
+  background: var(--color-success-bg);
+  color: var(--color-success-fg);
+}
+
+.status-badge--pending {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-fg);
+}
+
+/* -----------------------------------------------------------------------
+   Chips (shared by catalog cards + admin manage)
+   ----------------------------------------------------------------------- */
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sNudge);
+}
+
+.chip {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-subtle);
+  min-width: 0;
+}
+
+.chip-label {
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-fg-tertiary);
+  font-weight: 600;
+}
+
+.chip-value {
+  font-size: 0.95em;
+  color: var(--color-fg-primary);
+  word-break: break-word;
+}
+
+/* -----------------------------------------------------------------------
+   Admin page
+   ----------------------------------------------------------------------- */
+
+.admin-header-band {
+  width: 100%;
+  padding-block: var(--space-xxl) var(--space-xl);
+  border-bottom: 1px solid var(--color-stroke-subtle);
+}
+
+.admin-workspace-band {
+  width: 100%;
+}
+
+/* -----------------------------------------------------------------------
+   Admin manage table + empty state (shared by manage and initiatives)
+   ----------------------------------------------------------------------- */
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-xl) var(--space-l);
+  color: var(--color-fg-secondary);
+}
+
+.empty-state-hint {
+  color: var(--color-fg-tertiary);
+  font-size: var(--font-size-200);
+}
+
+.manage-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--color-stroke-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.manage-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1.5fr;
+  align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-s) var(--space-m);
+  border-bottom: 1px solid var(--color-stroke-subtle);
+}
+
+.manage-row:last-child {
+  border-bottom: none;
+}
+
+.manage-row--header {
+  background: var(--color-bg-subtle);
+  font-weight: 600;
+}
+
+.manage-col-header {
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-fg-tertiary);
+  font-weight: 600;
+}
+
+.manage-cell {
+  font-size: 0.95em;
+  color: var(--color-fg-primary);
+  word-break: break-word;
+}
+
+.manage-cell--title {
+  font-weight: 500;
+}
+
+.manage-actions {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.manage-dialog-footer {
+  display: flex;
+  gap: var(--space-s);
+  justify-content: flex-end;
+}
+
+@media (max-width: 720px) {
+  .manage-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Initiative SDG tags -- shared by the catalog cards and the detail hero. */
+.initiative-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+}
+
+.initiative-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--color-brand-selected);
+  color: var(--color-brand-active);
+  font-size: 0.8em;
+  font-weight: 500;
+}
