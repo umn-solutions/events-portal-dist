@@ -1,0 +1,134 @@
+Events Portal - Top 20 Crucial UAT Items
+Ranked by criticality: destructive/data-writing ops, data integrity, core flows, crash-risk.
+Source: user-tests.md (47 items total)
+
+Result legend: Pass / Fail / Blocked
+
+====================================================================
+
+1. IMP-06 - Admin - Import
+   Story:    As an admin, I want to confirm and import valid sheets only.
+   Steps:    On a preview with valid + invalid sheets, click "Confirm".
+   Expected: Only valid sheets created in Initiatives list (status Open).
+             Invalid ones skipped. Success toast shows count.
+   Result: ______   Tester: ______   Date: ______   Notes: ______
+
+2. IMP-01 - Admin - Import
+   Story:    As an admin, importing an initiative Excel correctly loads all fields.
+   Steps:    Admin > Import > "Import". Select a valid .xlsx.
+   Expected: Each sheet becomes a preview card. Every mapped field
+             (association, mission, skills, logistics, etc.) shows the value from the sheet.
+   Result: ______   Tester: ______   Date: ______   Notes: ______
+
+3. IMP-03 - Admin - Import
+   Story:    As an admin, I want invalid sheets clearly flagged.
+   Steps:    Import a workbook with a sheet missing required fields.
+   Expected: That sheet's card marked invalid, shows field-level error messages.
+   Result: ______   Tester: ______   Date: ______   Notes: ______
+
+4. MNG-06 - Admin - Manage
+   Story:    As an admin, I want delete to require confirmation.
+   Steps:    Click "Delete", then confirm in the dialog.
+   Expected: Confirmation dialog appears; on confirm the item is deleted and
+             table refreshes. Cancel aborts.
+   Result: ______   Tester: ______   Date: ______   Notes: ______
+
+5. MNG-03 - Admin - Manage
+   Story:    As an admin, I want to cancel an initiative.
+   Steps:    Click "Cancel" on an Open initiative.
+   Expected: Status changes to Cancelled; table refreshes; success toast shown.
+   Result: ______   Tester: ______   Date: ______   Notes: ______
+
+6. MNG-04 - Admin - Manage
+   Story:    As an admin, I want to close an initiative.
+   Steps:    Click "Close" on an Open initiative.
+   Expected: Status changes to Closed; table refreshes; success toast shown.
+   Result: ______   Tester: ______   Date: ______   Notes: ______
+
+7. IMP-07 - Admin - Import
+   Story:    As an admin, I want to know if some rows fail to save.
+   Steps:    Force a save failure (or observe when one occurs).
+   Expected: Message reports partial success, e.g. "Imported 2 of 3. 1 failed."
+   Result: ______   Tester: ______   Date: ______   Notes: ______
+
+8. INIT-09 - Initiatives
+   Story:    As a volunteer, I want to open an initiative for details.
+   Steps:    Click any initiative card.
+   Expected: Navigates to the detail page for that specific initiative.
+   Result: ______   Tester: ______   Date: ______   Notes: ______
+
+9. DET-01 - Detail
+   Story:    As a volunteer, I want to view full details of one initiative.
+   Steps:    Open an initiative from the list.
+   Expected: Detail page shows the correct initiative title, association, and status.
+   Result: ______   Tester: ______   Date: ______   Notes: ______
+
+10. INIT-01 - Initiatives
+    Story:    As a volunteer, I want to browse all initiatives with a count.
+    Steps:    Open the Initiatives page.
+    Expected: All initiatives render as cards. Count label matches number of cards
+              (e.g. "12 initiatives").
+    Result: ______   Tester: ______   Date: ______   Notes: ______
+
+11. INIT-06 - Initiatives
+    Story:    As a volunteer, I want to combine filters.
+    Steps:    Set Search + Status + SDG + Location together.
+    Expected: Results match ALL active filters (AND logic). Count reflects the intersection.
+    Result: ______   Tester: ______   Date: ______   Notes: ______
+
+12. INIT-02 - Initiatives
+    Story:    As a volunteer, I want to search initiatives by text.
+    Steps:    Type a known name/association/mission fragment into Search.
+    Expected: Only cards whose Title, Association, or Mission contain the text remain.
+              Count updates.
+    Result: ______   Tester: ______   Date: ______   Notes: ______
+
+13. INIT-03 - Initiatives
+    Story:    As a volunteer, I want to filter by status.
+    Steps:    Pick a value in the Status filter.
+    Expected: Only initiatives with that status show. Selecting "All" clears the filter.
+    Result: ______   Tester: ______   Date: ______   Notes: ______
+
+14. DET-08 - Detail
+    Story:    As a volunteer, I want graceful handling of a bad link.
+    Steps:    Open the detail route with no id or an unknown id.
+    Expected: Not-found message shows with a "Back to initiatives" link. No crash.
+    Result: ______   Tester: ______   Date: ______   Notes: ______
+
+15. DET-04 - Detail
+    Story:    As a volunteer, I want to open the registration form.
+    Steps:    Click "Register".
+    Expected: Modal opens with Full name, Email, Motivation fields and a preview notice.
+              Submit disabled (preview only).
+    Result: ______   Tester: ______   Date: ______   Notes: ______
+
+16. IMP-02 - Admin - Import
+    Story:    As an admin, I want each sheet imported as a separate initiative.
+    Steps:    Import a workbook with multiple sheets.
+    Expected: One preview card per sheet. Header shows total sheet count.
+    Result: ______   Tester: ______   Date: ______   Notes: ______
+
+17. MNG-01 - Admin - Manage
+    Story:    As an admin, I want to see all initiatives in a table.
+    Steps:    Admin > Manage tab.
+    Expected: Table lists Title, Association, Status, and Actions for every initiative.
+    Result: ______   Tester: ______   Date: ______   Notes: ______
+
+18. MNG-02 - Admin - Manage
+    Story:    As an admin, I want status-appropriate actions.
+    Steps:    Inspect an Open initiative's row.
+    Expected: Open initiatives show Cancel and Close buttons.
+    Result: ______   Tester: ______   Date: ______   Notes: ______
+
+19. HOME-02 - Home
+    Story:    As a visitor, I want to see impact figures so I understand the program size.
+    Steps:    On Home, scroll to "Volunteering at a glance".
+    Expected: Four figures show: Total initiatives, Partner organisations,
+              Volunteers needed, Open initiatives. Numbers match actual list data.
+    Result: ______   Tester: ______   Date: ______   Notes: ______
+
+20. NAV-01 - Navigation
+    Story:    As a user, I want to move between pages via the top nav.
+    Steps:    Click each nav link: Initiatives, My Profile, Admin.
+    Expected: Each link loads the correct page.
+    Result: ______   Tester: ______   Date: ______   Notes: ______
